@@ -1,0 +1,68 @@
+<div class="container">
+<button (click)="getValues()" mat-button>Obteber valores</button>
+<button (click)="deleteAll()" mat-button>Eliminar valores de base de datos</button>
+<button (click)="downloadValues()" mat-button>Descargar y insertar valores en base de datos</button>
+<br>
+  <mat-form-field>
+  <mat-label>Filtro</mat-label>
+  <input [disabled]="demands.length === 0" matInput type="text" (keyup)="applyFilter()" [(ngModel)]="filterValue">
+  @if (filterValue) {
+    <button [disabled]="demands.length === 0" matSuffix mat-icon-button aria-label="Clear" (click)="inputClearable()">
+      <mat-icon>close</mat-icon>
+    </button>
+  }
+</mat-form-field>
+
+<mat-form-field *ngIf="orderValues?.length">
+  <mat-label>Ordenar por:</mat-label>
+  <mat-select  [disabled]="demands.length === 0" [(ngModel)]="selectedOrder" (selectionChange)="sortBySelectedOrder()">
+    <mat-option *ngFor="let order of orderValues" [value]="order.value">
+      {{ order.viewValue }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 custom-table">
+
+  <ng-container matColumnDef="zone">
+    <th mat-header-cell *matHeaderCellDef> Zona de Potencia </th>
+    <td mat-cell *matCellDef="let element"> {{ element.zone }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="participant">
+    <th mat-header-cell *matHeaderCellDef> Participante </th>
+    <td mat-cell *matCellDef="let element"> {{ element.participant }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="subaccount">
+    <th mat-header-cell *matHeaderCellDef> Subcuenta del Participante </th>
+    <td mat-cell *matCellDef="let element"> {{ element.subaccount }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="demandCapacityMW">
+    <th mat-header-cell *matHeaderCellDef> Capacidad Demandada (MW) </th>
+    <td mat-cell *matCellDef="let element"> {{ element.demandCapacityMW | number:'1.2-2' }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="annualPowerRequirementMW">
+    <th mat-header-cell *matHeaderCellDef> Requisito Anual de Potencia (MW-año) </th>
+    <td mat-cell *matCellDef="let element"> {{ element.annualPowerRequirementMW | number:'1.2-2' }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="efficientAnnualRequirementMW">
+    <th mat-header-cell *matHeaderCellDef> Requisito Anual Eficiente (MW-año) </th>
+    <td mat-cell *matCellDef="let element"> {{ element.efficientAnnualRequirementMW | number:'1.2-2' }} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+</table>
+<mat-paginator [pageSizeOptions]="[5, 10]" showFirstLastButtons #paginator></mat-paginator>
+</div>
+
+
+
+
+

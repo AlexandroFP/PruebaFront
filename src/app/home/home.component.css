@@ -1,0 +1,12 @@
+.custom-table {
+  width: 80%;
+  margin: 20px auto; 
+  border: 2px solid #ccc;
+  border-radius: 12px; 
+  overflow: hidden; 
+  background-color: white;
+}
+
+.container {
+  padding: 20px;
+}
