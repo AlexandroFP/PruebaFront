@@ -26,6 +26,7 @@ Este proyecto es una aplicación web construida con **Angular** que consume una 
 
 
    git clone https://github.com/AlexandroFP/PruebaFront.git
+   
    cd PruebaFront
    
 3. Instala las dependencias:
